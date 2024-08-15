@@ -15,6 +15,7 @@ let s:delimiterMap = {
     \ 'ada': { 'left': '--', 'leftAlt': '--  ' },
     \ 'ahdl': { 'left': '--' },
     \ 'ahk': { 'left': ';', 'leftAlt': '/*', 'rightAlt': '*/' },
+    \ 'alloy': { 'left': '/*', 'right': '*/', 'leftAlt': '//' },
     \ 'amiga': { 'left': ';' },
     \ 'aml': { 'left': '/*' },
     \ 'ampl': { 'left': '#' },
@@ -23,6 +24,7 @@ let s:delimiterMap = {
     \ 'apachestyle': { 'left': '#' },
     \ 'apdl': { 'left': '!' },
     \ 'applescript': { 'left': '--', 'leftAlt': '(*', 'rightAlt': '*)' },
+    \ 'aptconf': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'armasm': { 'left': ';' },
     \ 'asciidoc': { 'left': '//' },
     \ 'asm': { 'left': ';', 'leftAlt': '#' },
@@ -50,10 +52,11 @@ let s:delimiterMap = {
     \ 'btm': { 'left': '::' },
     \ 'c': { 'left': '/*', 'right': '*/', 'leftAlt': '//' },
     \ 'cabal': { 'left': '--' },
-    \ 'cairo': { 'left': '#' },
+    \ 'cairo': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'calibre': { 'left': '//' },
     \ 'caos': { 'left': '*' },
     \ 'catalog': { 'left': '--', 'right': '--' },
+    \ 'cel': { 'left': '//' },
     \ 'cf': { 'left': '<!---', 'right': '--->' },
     \ 'cfg': { 'left': '#' },
     \ 'cg': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
@@ -80,6 +83,7 @@ let s:delimiterMap = {
     \ 'cython': { 'left': '# ', 'leftAlt': '#' },
     \ 'd': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'dakota': { 'left': '#' },
+    \ 'dart': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'dcl': { 'left': '$!' },
     \ 'debcontrol': { 'left': '#' },
     \ 'debsources': { 'left': '#' },
@@ -87,11 +91,12 @@ let s:delimiterMap = {
     \ 'desktop': { 'left': '#' },
     \ 'dhcpd': { 'left': '#' },
     \ 'diff': { 'left': '#' },
+    \ 'dts': { 'left': '/*', 'right': '*/', 'leftAlt': '//' },
     \ 'django': { 'left': '{% comment %}', 'right': '{% endcomment %}', 'leftAlt': '{#', 'rightAlt': '#}' },
     \ 'dns': { 'left': ';' },
     \ 'docbk': { 'left': '<!--', 'right': '-->' },
     \ 'dockerfile': { 'left': '#' },
-    \ 'dosbatch': { 'left': 'REM ', 'leftAlt': '::' },
+    \ 'dosbatch': { 'left': 'REM ', 'nested': 1, 'leftAlt': 'REM ', 'nestedAlt': 1 },
     \ 'dosini': { 'left': ';' },
     \ 'dot': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'dracula': { 'left': ';' },
@@ -159,6 +164,7 @@ let s:delimiterMap = {
     \ 'haxe': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'hb': { 'left': '#' },
     \ 'hbs': { 'left': '{{!-- ', 'right': ' --}}' },
+    \ 'hcl': { 'left': '#', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'hercules': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'hive': { 'left': '-- ' },
     \ 'hocon': { 'left': '//', 'leftAlt': '#' },
@@ -190,11 +196,13 @@ let s:delimiterMap = {
     \ 'jgraph': { 'left': '(*', 'right': '*)' },
     \ 'jinja': { 'left': '{#', 'right': '#}', 'leftAlt': '<!--', 'rightAlt': '-->' },
     \ 'jproperties': { 'left': '#' },
+    \ 'jq': { 'left': '#' },
     \ 'json5': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'jsonc': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'jsonnet': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'jsp': { 'left': '<%--', 'right': '--%>' },
     \ 'julia': { 'left': '# ', 'leftAlt': '#=', 'rightAlt': '=#' },
+    \ 'just' : { 'left': '#' },
     \ 'kivy': { 'left': '#' },
     \ 'kix': { 'left': ';' },
     \ 'kscript': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
@@ -274,6 +282,7 @@ let s:delimiterMap = {
     \ 'ox': { 'left': '//' },
     \ 'paludis-use-conf': { 'left': '#' },
     \ 'pandoc': { 'left': '<!--', 'right': '-->' },
+    \ 'pamenv': { 'left': '#' },
     \ 'pascal': { 'left': '{', 'right': '}', 'leftAlt': '(*', 'rightAlt': '*)' },
     \ 'patran': { 'left': '$', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'pcap': { 'left': '#' },
@@ -382,6 +391,7 @@ let s:delimiterMap = {
     \ 'stan': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'stp': { 'left': '/*', 'right': '*/', 'leftAlt': '//' },
     \ 'supercollider': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
+    \ 'svelte': { 'left': '<!--', 'right': '-->' },
     \ 'swift': { 'left': '/*', 'right': '*/', 'leftAlt': '//' },
     \ 'systemverilog': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'tads': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
@@ -396,6 +406,7 @@ let s:delimiterMap = {
     \ 'texmf': { 'left': '%' },
     \ 'tf': { 'left': '#' },
     \ 'tidy': { 'left': '#' },
+    \ 'tla': { 'left': '\\*', 'leftAlt': '(*', 'rightAlt': '*)' },
     \ 'tli': { 'left': '#' },
     \ 'tmux': { 'left': '#' },
     \ 'toml': { 'left': '#' },
@@ -417,6 +428,7 @@ let s:delimiterMap = {
     \ 'vala': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'vasp': { 'left': '!' },
     \ 'vb': { 'left': "'" },
+    \ 'vcl': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'velocity': { 'left': '##', 'right': '', 'leftAlt': '#*', 'rightAlt': '*#' },
     \ 'vera': { 'left': '/*', 'right': '*/', 'leftAlt': '//' },
     \ 'verilog': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
@@ -439,7 +451,8 @@ let s:delimiterMap = {
     \ 'xpm2': { 'left': '!' },
     \ 'xquery': { 'left': '(:', 'right': ':)' },
     \ 'yaml': { 'left': '#' },
-    \ 'z8a': { 'left': ';' }
+    \ 'z8a': { 'left': ';' },
+    \ 'zig': { 'left': '//' }
     \ }
 
 let g:NERDDelimiterMap = s:delimiterMap
@@ -456,10 +469,6 @@ endif
 " This function is responsible for setting up buffer scoped variables for the
 " current buffer.
 function! nerdcommenter#SetUp() abort
-    if exists('b:NERDCommenterDelims')
-        return
-    endif
-
     let filetype = &filetype
 
     "for compound filetypes, if we don't know how to handle the full filetype
@@ -477,7 +486,7 @@ function! nerdcommenter#SetUp() abort
     let b:NERDSexyComMarker = ''
 
     if has_key(s:delimiterMap, filetype)
-        let b:NERDCommenterDelims = s:delimiterMap[filetype]
+        let b:NERDCommenterDelims = copy(s:delimiterMap[filetype])
         for i in ['left', 'leftAlt', 'right', 'rightAlt']
             if !has_key(b:NERDCommenterDelims, i)
                 let b:NERDCommenterDelims[i] = ''
@@ -489,10 +498,10 @@ function! nerdcommenter#SetUp() abort
             endif
         endfor
         " if g:NERD_<filetype>_alt_style is defined, use the alternate style
-        let b:NERDCommenterFirstInit = getbufvar(1,'NERDCommenterFirstInit')
+        let b:NERDCommenterFirstInit = getbufvar(bufnr('%'),'NERDCommenterFirstInit')
         if exists('g:NERDAltDelims_'.filetype) && eval('g:NERDAltDelims_'.filetype) && !b:NERDCommenterFirstInit
-            call nerdcommenter#SwitchToAlternativeDelimiters(0)
             let b:NERDCommenterFirstInit = 1
+            call nerdcommenter#SwitchToAlternativeDelimiters(0)
         endif
     else
         let b:NERDCommenterDelims = s:CreateDelimMapFromCms()
@@ -530,10 +539,10 @@ endfunction
 "    if this function changed the delimiters or not
 " function nerdcommenter#SwitchToAlternativeDelimiters(printMsgs)
 function! nerdcommenter#SwitchToAlternativeDelimiters(printMsgs) abort
-    call nerdcommenter#SetUp()
     if exists('*NERDCommenter_before')
         exe 'call NERDCommenter_before()'
     endif
+    call nerdcommenter#SetUp()
     "if both of the alternative delimiters are empty then there is no
     "alternative comment style so bail out
     if b:NERDCommenterDelims['leftAlt'] ==# '' && b:NERDCommenterDelims['rightAlt'] ==# ''
@@ -1171,10 +1180,10 @@ endfunction
 "    'Minimal', 'Toggle', 'AlignLeft', 'AlignBoth', 'Comment',
 "    'Nested', 'ToEOL', 'Append', 'Insert', 'Uncomment', 'Yank'
 function! nerdcommenter#Comment(mode, type) range abort
-    call nerdcommenter#SetUp()
     if exists('*NERDCommenter_before')
         exe 'call NERDCommenter_before()'
     endif
+    call nerdcommenter#SetUp()
 
     let isVisual = a:mode =~# '[vsx]'
 
@@ -1313,6 +1322,7 @@ endfunction
 "   -col        the column number of the character
 " Return: Number, 1 if the character is inside a comment, 0 if is not
 function! nerdcommenter#IsCharCommented(line, col) abort
+    call nerdcommenter#SetUp()
   " Function: s:searchfor(str, line, col, direction, [maxline])
   " search str in the buffer, including the character at [line, col]
   " Args:
@@ -1762,6 +1772,8 @@ function! s:UncommentLineNormal(line) abort
     endif
 
 
+    let indxLeft = s:FindDelimiterIndex(s:Left(), line)
+    let indxLeftAlt = s:FindDelimiterIndex(s:Left({'alt': 1}), line)
     let indxLeftPlace = s:FindDelimiterIndex(g:NERDLPlace, line)
     let indxRightPlace = s:FindDelimiterIndex(g:NERDRPlace, line)
 
@@ -2524,15 +2536,15 @@ function! s:IsDelimValid(delimiter, delIndx, line) abort
 
     "vim comments are so fucking stupid!! Why the hell do they have comment
     "delimiters that are used elsewhere in the syntax?!?! We need to check
-    "some conditions especially for vim
-    if &filetype ==# 'vim'
+    "some conditions especially for vim.
+    "Also check &commentstring because it may be overwritten for embedded lua.
+    if &filetype ==# 'vim' && &commentstring[0] ==# '"'
         if !s:IsNumEven(s:CountNonESCedOccurances(preComStr, '"', "\\"))
             return 0
         endif
 
-        "if the delimiter is on the very first char of the line or is the
-        "first non-tab/space char on the line then it is a valid comment delimiter
-        if a:delIndx ==# 0 || a:line =~# "^\s\\{" . a:delIndx . "\\}\".*$"
+        " if the delimiter is the first non-whitespace character, it is valid
+        if a:line =~# '^\s*"'
             return 1
         endif
 
